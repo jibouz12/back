@@ -16,7 +16,7 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 pseudo: req.body.email.split('@')[0],
-                facebook: req.body.facebook,
+                tiktok: req.body.tiktok,
                 insta: req.body.insta,
                 snap: req.body.snap
             });
@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
             res.status(200).json({
                 pseudo: user.pseudo,
                 userId: user._id,
-                facebook: user.facebook,
+                tiktok: user.tiktok,
                 insta: user.insta,
                 snap: user.snap,
                 token: jwt.sign(
