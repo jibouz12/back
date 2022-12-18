@@ -48,13 +48,12 @@ exports.login = (req, res, next) => {
             res.status(200).json({
                 pseudo: user.pseudo,
                 userId: user._id,
-                facebook,
-                insta,
-                snap,
+                facebook: user.facebook,
+                insta: user.insta,
+                snap: user.snap,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,
-                { expiresIn: '24h' }
                 )
             });
         })
