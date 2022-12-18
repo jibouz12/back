@@ -16,9 +16,9 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 pseudo: req.body.email.split('@')[0],
-                facebook: "",
-                insta: "",
-                snap: ""
+                facebook: req.body.facebook,
+                insta: req.body.insta,
+                snap: req.body.snap
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
