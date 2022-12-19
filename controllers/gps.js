@@ -29,10 +29,10 @@ exports.getGPSByUserId = (req, res, next) => {
 ///////////////////////////
 // recupérer les localisations proches :
 exports.getGPSClose = (req, res, next) => {
-    let lat = parseInt(req.params.id.split('+')[0]);
-    let lon = req.params.id.split('@')[1];
+//    let lat = parseInt(req.params.id.split('+')[0]);
+//    let lon = req.params.id.split('@')[1];
     GPS.find()
-    .then(gpss => res.status(200).json(gpss))
+    .then(gps => res.status(200).json(gps))
     .catch(error => res.status(400).json({ error }));
 };
 
