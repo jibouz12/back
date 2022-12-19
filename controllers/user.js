@@ -15,7 +15,7 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
-                pseudo: req.body.email.split('@')[0],
+                pseudo: req.body.pseudo,
                 insta: req.body.insta,
             });
             user.save()
