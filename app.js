@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", userRoutes);
 
 /// --> route des localisations
-app.use("/api/GPS", GPSRoutes);
+app.use("/api/gps", GPSRoutes);
 
 
 module.exports = app;

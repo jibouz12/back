@@ -1,24 +1,20 @@
 const User = require("../models/User");
 const auth = require("../middleware/auth");
-const GPS = require('../models/GPS');
 const GPS = require("../models/GPS");
 
 
 ////////////////
 // créer localisation
 exports.createGPS = (req, res, next) => {
-    User.findOne({ _id: req.auth.userId})
-    .then(() => {
-        const GPS = new GPS({
+        const gps = new GPS({
             userId: req.auth.userId,
             latitude: req.body.latitude,
             longitude: req.body.longitude
         });
-        GPS.save()
+        gps.save()
         .then(() => {res.status(201).json({message: 'GPS enregistré'})})
         .catch(error => { res.status(400).json( { error })})
-    })
-}
+};
 
 ///////////////////////////
 // recupérer localisation d'un utilisateur --> avec userId :
