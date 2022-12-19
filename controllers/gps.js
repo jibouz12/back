@@ -23,3 +23,19 @@ exports.getGPSByUserId = (req, res, next) => {
     .then(gps => res.status(200).json(gps))
     .catch(error => res.status(400).json({ error }));
 };
+
+//////////////////////
+// modifier localisation
+exports.modifyGPS = (req, res, next) => {
+    GPS.findOne({ userId: req.auth.userId })
+    .then(gps => {
+        GPS.updateOne({ userId: req.auth.userId },
+            {
+                latitude : req.body.latitude,
+                longitude: req.body.longitude
+            }
+        )
+        .then(() => { res.status(201).json({message: 'localisation actualisée !'})})
+        .catch(error => { res.status(400).json( { error })})
+    })
+}
