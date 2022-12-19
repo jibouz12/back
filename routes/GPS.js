@@ -10,6 +10,7 @@ router.post('', auth, GPSCtrl.createGPS);
 
 /// --> récupérer une localisation
 router.get('/:id', auth, GPSCtrl.getGPSByUserId);
+router.get('/:id', auth, GPSCtrl.getGPSClose);
 
 /// --> modifier une localisation
 router.put('', auth, GPSCtrl.modifyGPS);

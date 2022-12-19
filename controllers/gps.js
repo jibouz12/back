@@ -24,6 +24,16 @@ exports.getGPSByUserId = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
+///////////////////////////
+// recupérer les localisations proches :
+exports.getGPSClose = (req, res, next) => {
+    let latitude = req.params.id.split('+')[0];
+    let longitude = req.params.id.split('@')[1];
+    GPS.find({ latitude:{ $gte: latitude - 0.05 && longitude - 0.05, $lte: latitude + 0.05 && longitude + 0.05} })
+    .then(gps => res.status(200).json(gps))
+    .catch(error => res.status(400).json({ error }));
+};
+
 //////////////////////
 // modifier localisation
 exports.modifyGPS = (req, res, next) => {
