@@ -31,7 +31,7 @@ exports.getGPSByUserId = (req, res, next) => {
 exports.getGPSClose = (req, res, next) => {
     let lat = parseInt(req.params.id.split('+')[0]);
     let lon = req.params.id.split('@')[1];
-    GPS.find({ latitude: lat })
+    GPS.find()
     .then(gpss => res.status(200).json(gpss))
     .catch(error => res.status(400).json({ error }));
 };
