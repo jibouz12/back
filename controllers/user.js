@@ -16,9 +16,7 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 pseudo: req.body.email.split('@')[0],
-                tiktok: req.body.tiktok,
                 insta: req.body.insta,
-                snap: req.body.snap
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -48,9 +46,7 @@ exports.login = (req, res, next) => {
             res.status(200).json({
                 pseudo: user.pseudo,
                 userId: user._id,
-                tiktok: user.tiktok,
                 insta: user.insta,
-                snap: user.snap,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,

@@ -5,9 +5,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   pseudo: { type: String, required: true },
-  tiktok: { type: String },
   insta: { type: String },
-  snap: { type: String }
 });
 
 userSchema.plugin(uniqueValidator);
