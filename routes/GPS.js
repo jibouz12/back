@@ -8,9 +8,8 @@ const router = express.Router();
 /// --> créer une localisation
 router.post('', auth, GPSCtrl.createGPS);
 
-/// --> récupérer une localisation
-router.get('/:id', auth, GPSCtrl.getGPSByUserId);
-router.get('', auth, GPSCtrl.getGPSClose);
+/// --> récupérer les localisations proches
+router.get('/:id', auth, GPSCtrl.getGPSClose);
 
 /// --> modifier une localisation
 router.put('', auth, GPSCtrl.modifyGPS);
