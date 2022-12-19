@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
+const GPSRoutes = require("./routes/GPS");
 require("dotenv").config();
 
 ////////////////////////////////
@@ -33,6 +34,9 @@ app.use((req, res, next) => {
 /// routes principales de l'API :
 /// --> route des utilisateurs
 app.use("/api/auth", userRoutes);
+
+/// --> route des localisations
+app.use("/api/GPS", GPSRoutes);
 
 
 module.exports = app;
