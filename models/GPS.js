@@ -6,8 +6,8 @@ const GPSSchema = mongoose.Schema({
     userId: { type: String, required: true, unique: true },
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
-    pseudo: { type: String, required: true },
-    insta: { type: String, required: true }
+    pseudo: { type: String },
+    insta: { type: String }
 });
 
 GPSSchema.plugin(uniqueValidator);
