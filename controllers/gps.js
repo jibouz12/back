@@ -10,8 +10,8 @@ exports.createGPS = (req, res, next) => {
             userId: req.auth.userId,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            pseudo: req.auth.pseudo,
-            insta: req.auth.insta
+            pseudo: req.body.pseudo,
+            insta: req.body.insta
         });
         gps.save()
         .then(() => {res.status(201).json({message: 'GPS enregistré'})})
