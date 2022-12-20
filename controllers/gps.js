@@ -30,7 +30,7 @@ exports.getGPSByUserId = (req, res, next) => {
 // recupérer les localisations proches :
 exports.getGPSClose = (req, res, next) => {
     let lat = parseInt(req.params.id.split('+')[0]);
-    let lon = parseInt(req.params.id.split('@')[1]);
+    let lon = parseInt(req.params.id.split('+')[1]);
     GPS.find({
         $and: [
             { latitude: { $lte: lat + 0.05 } },
