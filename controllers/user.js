@@ -105,15 +105,13 @@ exports.modifyGPS = (req, res, next) => {
 // modifier avatar
 exports.updateAvatar = (req, res, next) => {
     User.findOne({ _id: req.auth.userId })
-    .then(user => {
-        User.updateOne({ _id: req.auth.userId },
-            {
-                avatar: req.body.avatar
-            }
-        )
-        .then(user => {res.status(200).json({ avatar: user.avatar })})
-        .catch(error => {res.status(400).json({ error })})
-    })
+    User.updateOne({ _id: req.auth.userId },
+        {
+            avatar: req.body.avatar
+        }
+    )
+    .then(() => {res.status(200).json({ message: "avatar modifié !" })})
+    .catch(error => {res.status(400).json({ error })})
 }
 
 /////////////////////
