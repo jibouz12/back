@@ -7,7 +7,6 @@ const userSchema = mongoose.Schema({
   latitude: { type: Number, required: true },
   longitude: { type: Number, required: true },
   pseudo: { type: String, required: true, unique: true },
-  insta: { type: String, required: true },
 });
 
 userSchema.plugin(uniqueValidator);
