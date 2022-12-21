@@ -19,6 +19,7 @@ exports.signup = (req, res, next) => {
                 longitude: req.body.longitude,
                 insta: req.body.insta,
                 avatar: "avatar",
+                dist: 1,
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -49,6 +50,7 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 insta: user.insta,
                 avatar: user.avatar,
+                dist: user.dist,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,
@@ -105,6 +107,21 @@ exports.updateAvatar = (req, res, next) => {
             }
         )
         .then(() => { res.status(201).json({message: 'avatar modifié !'})})
+        .catch(error => { res.status(400).json( { error })})
+    })
+}
+
+/////////////////////
+// modifier distance
+exports.updateDist = (req, res, next) => {
+    User.findOne({ _id: req.auth.userId })
+    .then(user => {
+        User.updateOne({ _id: req.auth.userId },
+            {
+                dist: req.body.dist
+            }
+        )
+        .then(() => { res.status(201).json({message: 'distance modifiée !'})})
         .catch(error => { res.status(400).json( { error })})
     })
 }

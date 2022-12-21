@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
   longitude: { type: Number, required: true },
   insta: { type: String, required: true, unique: true },
   avatar: { type: String, required: true },
+  dist: { type: Number, required: true },
 });
 
 userSchema.plugin(uniqueValidator);

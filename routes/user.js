@@ -20,4 +20,7 @@ router.put('/gps', auth, userCtrl.modifyGPS);
 /// --> modifier avatar
 router.put('/avatar', auth, userCtrl.updateAvatar);
 
+/// --> modifier distance
+router.put('/dist', auth, userCtrl.updateDist);
+
 module.exports = router;
