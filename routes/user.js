@@ -17,4 +17,7 @@ router.get('/gps/:id', auth, userCtrl.getGPSClose);
 /// --> modifier une localisation
 router.put('/gps', auth, userCtrl.modifyGPS);
 
+/// --> modifier avatar
+router.put('/avatar', auth, userCtrl.updateAvatar);
+
 module.exports = router;
