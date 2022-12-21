@@ -23,4 +23,7 @@ router.put('/avatar', auth, userCtrl.updateAvatar);
 /// --> modifier distance
 router.put('/dist', auth, userCtrl.updateDist);
 
+/// --> récupérer distance
+router.get('/dist', auth, userCtrl.getDist);
+
 module.exports = router;

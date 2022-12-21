@@ -50,7 +50,6 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 insta: user.insta,
                 avatar: user.avatar,
-                dist: user.dist,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,
@@ -62,6 +61,7 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
+////////////////////////////////////////////
 // recupérer les localisations proches :
 exports.getGPSClose = (req, res, next) => {
     let userId = req.auth.userId;
@@ -124,4 +124,12 @@ exports.updateDist = (req, res, next) => {
         .then(() => { res.status(201).json({message: 'distance modifiée !'})})
         .catch(error => { res.status(400).json( { error })})
     })
+}
+
+/////////////////////
+// récupérer distance
+exports.getDist = (req, res, next) => {
+    User.findOne({ _id: req.auth.userId })
+    .then(() => { res.status(201).json({dist: user.dist})})
+    .catch(error => { res.status(400).json( { error })})
 }
