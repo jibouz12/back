@@ -12,9 +12,9 @@ router.post('/login', userCtrl.login);
 
 /////////////////
 /// --> récupérer les localisations proches
-router.get(':id', auth, userCtrl.getGPSClose);
+router.get('/gps/:id', auth, userCtrl.getGPSClose);
 
 /// --> modifier une localisation
-router.put('', auth, userCtrl.modifyGPS);
+router.put('/gps', auth, userCtrl.modifyGPS);
 
 module.exports = router;
