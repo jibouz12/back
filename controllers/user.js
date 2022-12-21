@@ -18,6 +18,7 @@ exports.signup = (req, res, next) => {
                 latitude: req.body.latitude,
                 longitude: req.body.longitude,
                 insta: req.body.insta,
+                avatar: "avatar",
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -47,6 +48,7 @@ exports.login = (req, res, next) => {
             res.status(200).json({
                 userId: user._id,
                 insta: user.insta,
+                avatar: user.avatar,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,
