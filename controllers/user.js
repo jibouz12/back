@@ -130,6 +130,10 @@ exports.updateDist = (req, res, next) => {
 // récupérer distance
 exports.getDist = (req, res, next) => {
     User.findOne({ _id: req.auth.userId })
-    .then(() => { res.status(201).json({dist: user.dist})})
+    .then(user => {
+            res.status(200).json({
+                dist: user.dist
+            });
+        })
     .catch(error => { res.status(400).json( { error })})
 }
