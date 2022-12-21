@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 latitude: req.body.latitude,
                 longitude: req.body.longitude,
-                pseudo: req.body.pseudo,
+                insta: req.body.insta,
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -45,8 +45,8 @@ exports.login = (req, res, next) => {
                 return res.status(401).json({ message: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
-                pseudo: user.pseudo,
                 userId: user._id,
+                insta: user.insta,
                 token: jwt.sign(
                 { userId: user._id },
                 "" + process.env.CLE_TOKEN,
