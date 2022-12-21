@@ -15,6 +15,8 @@ exports.signup = (req, res, next) => {
             const user = new User({
                 email: req.body.email,
                 password: hash,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude,
                 pseudo: req.body.pseudo,
                 insta: req.body.insta,
             });
@@ -44,6 +46,8 @@ exports.login = (req, res, next) => {
                 return res.status(401).json({ message: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
+                latitude: user.latitude,
+                longitude: user.longitude,
                 pseudo: user.pseudo,
                 userId: user._id,
                 insta: user.insta,
@@ -57,3 +61,37 @@ exports.login = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }));
 };
+
+// recupérer les localisations proches :
+exports.getGPSClose = (req, res, next) => {
+    let userId = req.auth.userId;
+    let lat = parseFloat(req.params.id.split('+')[0]);
+    let lon = parseFloat(req.params.id.split('+')[1]);
+    User.find({
+        $and: [
+            { latitude: { $lte: (lat + 0.05) } },
+            { latitude: { $gte: (lat - 0.05) } },
+            { longitude: { $lte: (lon + 0.05) } },
+            { longitude: { $gte: (lon - 0.05) } },
+            { userId: { $not: { $eq: userId } } },
+        ]
+    })
+    .then(users => res.status(200).json(users))
+    .catch(error => res.status(400).json({ error }));
+};
+
+//////////////////////
+// modifier localisation
+exports.modifyGPS = (req, res, next) => {
+    User.findOne({ userId: req.auth.userId })
+    .then(user => {
+        User.updateOne({ userId: req.auth.userId },
+            {
+                latitude : req.body.latitude,
+                longitude: req.body.longitude
+            }
+        )
+        .then(() => { res.status(201).json({message: 'localisation actualisée !'})})
+        .catch(error => { res.status(400).json( { error })})
+    })
+}
