@@ -46,8 +46,6 @@ exports.login = (req, res, next) => {
                 return res.status(401).json({ message: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
-                latitude: user.latitude,
-                longitude: user.longitude,
                 pseudo: user.pseudo,
                 userId: user._id,
                 insta: user.insta,
@@ -73,7 +71,7 @@ exports.getGPSClose = (req, res, next) => {
             { latitude: { $gte: (lat - 0.05) } },
             { longitude: { $lte: (lon + 0.05) } },
             { longitude: { $gte: (lon - 0.05) } },
-            { userId: { $not: { $eq: userId } } },
+            { _id: { $not: { $eq: userId } } },
         ]
     })
     .then(users => res.status(200).json(users))
@@ -83,9 +81,9 @@ exports.getGPSClose = (req, res, next) => {
 //////////////////////
 // modifier localisation
 exports.modifyGPS = (req, res, next) => {
-    User.findOne({ userId: req.auth.userId })
+    User.findOne({ _id: req.auth.userId })
     .then(user => {
-        User.updateOne({ userId: req.auth.userId },
+        User.updateOne({ _id: req.auth.userId },
             {
                 latitude : req.body.latitude,
                 longitude: req.body.longitude

@@ -1,5 +1,6 @@
 const express = require('express');
 const userCtrl = require('../controllers/user');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.post('/login', userCtrl.login);
 
 /////////////////
 /// --> récupérer les localisations proches
-router.get('/:id', auth, userCtrl.getGPSClose);
+router.get(':id', auth, userCtrl.getGPSClose);
 
 /// --> modifier une localisation
 router.put('', auth, userCtrl.modifyGPS);
