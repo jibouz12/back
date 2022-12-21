@@ -67,16 +67,21 @@ exports.getGPSClose = (req, res, next) => {
     let userId = req.auth.userId;
     let lat = parseFloat(req.params.id.split('+')[0]);
     let lon = parseFloat(req.params.id.split('+')[1]);
-    User.find({
-        $and: [
-            { latitude: { $lte: (lat + 0.05) } },
-            { latitude: { $gte: (lat - 0.05) } },
-            { longitude: { $lte: (lon + 0.05) } },
-            { longitude: { $gte: (lon - 0.05) } },
-            { _id: { $not: { $eq: userId } } },
-        ]
+    User.findOne({_id: userId})
+    .then(user => {
+        let distance = (user.dist) / 100;
+        User.find({
+            $and: [
+                { latitude: { $lte: (lat + distance) } },
+                { latitude: { $gte: (lat - distance) } },
+                { longitude: { $lte: (lon + distance) } },
+                { longitude: { $gte: (lon - distance) } },
+                { _id: { $not: { $eq: userId } } },
+            ]
+        })
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(400).json({ error }));
     })
-    .then(users => res.status(200).json(users))
     .catch(error => res.status(400).json({ error }));
 };
 
