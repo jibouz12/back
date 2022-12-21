@@ -39,7 +39,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
     .then(user => {
         if (!user) {
-            return res.status(401).json({ message: 'Utilisateur non trouvé !'});
+            return res.status(401).json({ message: 'Utilisateur non trouvé !' });
         }
         bcrypt.compare(req.body.password, user.password)
         .then(valid => {
@@ -79,7 +79,7 @@ exports.getGPSClose = (req, res, next) => {
                 { _id: { $not: { $eq: userId } } },
             ]
         })
-        .then(users => res.status(200).json(users))
+        .then(users => res.status(200).json( users ))
         .catch(error => res.status(400).json({ error }));
     })
     .catch(error => res.status(400).json({ error }));
@@ -96,8 +96,8 @@ exports.modifyGPS = (req, res, next) => {
                 longitude: req.body.longitude
             }
         )
-        .then(() => { res.status(201).json({message: 'localisation actualisée !'})})
-        .catch(error => { res.status(400).json( { error })})
+        .then(() => {res.status(201).json({ message: 'localisation actualisée !' })})
+        .catch(error => {res.status(400).json({ error })})
     })
 }
 
@@ -111,8 +111,8 @@ exports.updateAvatar = (req, res, next) => {
                 avatar: req.body.avatar
             }
         )
-        .then(() => { res.status(201).json({message: 'avatar modifié !'})})
-        .catch(error => { res.status(400).json( { error })})
+        .then(user => {res.status(200).json({ avatar: user.avatar })})
+        .catch(error => {res.status(400).json({ error })})
     })
 }
 
@@ -126,8 +126,8 @@ exports.updateDist = (req, res, next) => {
                 dist: req.body.dist
             }
         )
-        .then(() => { res.status(201).json({message: 'distance modifiée !'})})
-        .catch(error => { res.status(400).json( { error })})
+        .then(() => {res.status(201).json({ message: 'distance modifiée !' })})
+        .catch(error => {res.status(400).json({ error })})
     })
 }
 
@@ -135,10 +135,6 @@ exports.updateDist = (req, res, next) => {
 // récupérer distance
 exports.getDist = (req, res, next) => {
     User.findOne({ _id: req.auth.userId })
-    .then(user => {
-            res.status(200).json({
-                dist: user.dist
-            });
-        })
-    .catch(error => { res.status(400).json( { error })})
+    .then(user => {res.status(200).json({ dist: user.dist })})
+    .catch(error => {res.status(400).json({ error })})
 }
