@@ -110,7 +110,7 @@ exports.updateAvatar = (req, res, next) => {
             avatar: req.body.avatar
         }
     )
-    .then((user) => {res.status(200).json({ avatar: user.avatar })})
+    .then(() => {res.status(200).json({ message: 'avatar modifié !' })})
     .catch(error => {res.status(400).json({ error })})
 }
 
