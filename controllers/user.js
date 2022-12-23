@@ -136,3 +136,11 @@ exports.getDist = (req, res, next) => {
     .then(user => {res.status(200).json({ dist: user.dist })})
     .catch(error => {res.status(400).json({ error })})
 }
+
+/////////////////////
+// récupérer avatar
+exports.getAvatar = (req, res, next) => {
+    User.findOne({ _id: req.auth.userId })
+    .then(user => {res.status(200).json({ avatar: user.avatar })})
+    .catch(error => {res.status(400).json({ error })})
+}
