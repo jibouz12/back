@@ -19,11 +19,11 @@ exports.signup = (req, res, next) => {
                 longitude: req.body.longitude,
                 insta: req.body.insta,
                 avatar: "avatar",
-                dist: 1,
+                dist: 10,
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-                .catch(error => res.status(400).json({ message: 'Pseudo ou Mail déjà enregistré !' }));
+                .catch(error => res.status(400).json({ message: error }));
         })
         .catch(error => res.status(500).json({ error }));
     } else {
