@@ -26,7 +26,5 @@ router.put('/dist', auth, userCtrl.updateDist);
 /// --> récupérer distance
 router.get('/dist', auth, userCtrl.getDist);
 
-/// --> récupérer avatar
-router.get('/avatar', auth, userCtrl.getAvatar);
 
 module.exports = router;
